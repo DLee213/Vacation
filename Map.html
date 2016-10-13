@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" type="text/css"
+    href="style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Abel">
+        <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Poiret+One">
+  <style>
+    ul {
+      font-family: 'Abel', serif;
+      font-size: 24px;
+    }
+    p.poiret {
+              font-family: 'Poiret+One', sans-serif;
+              font-size: 36px;
+              color: white;
+              text-shadow: 0 0 3px black, 0 0 5px black;
+           }
+  </style>
+  <link rel="icon"
+    type="image/png"
+    href="L.jpg" />
+    <title>Map</title>
+<head>
+<body>
+  <ul id="navbar">
+    <li class="navitem"><a class="active" href="Map.html">Map</a></li>
+    <li class="navitem"><a href="TestMap.html">Page 2</a></li>
+    <li  class="navitem" style="float:right"><a href="TestMap2.html">Sources</a></li>
+  </ul>
+<div id="map" style="width:100%;height:1000px"align="middle"></div>
+
+<script>
+function myMap() {
+  var myCenter = new google.maps.LatLng(0,0);
+  var Japan = new google.maps.LatLng(35.3627305,138.7284922);
+  var Bahama = new google.maps.LatLng(23.5585551,-75.8552504);
+  var Illios = new google.maps.LatLng(36.4622516,25.3795939);
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {
+    center: myCenter,
+  zoom: 3,
+  mapTypeId: google.maps.MapTypeId.SATELLITE,
+  disableDefaultUI: true
+  };
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  var marker = new google.maps.Marker({
+  position:Japan,
+  animation:google.maps.Animation.BOUNCE
+  })
+  var mark = new google.maps.Marker({
+  position:Illios,
+  animation:google.maps.Animation.BOUNCE
+  })
+  var marke = new google.maps.Marker({
+    position:Bahama,
+    animation:google.maps.Animation.BOUNCE
+  });
+mark.setMap(map);
+marker.setMap(map);
+marke.setMap(map);
+
+google.maps.event.addListener(mark,'click',function() {
+    var pos = map.getZoom();
+    map.setZoom(18);
+    map.setCenter(mark.getPosition());
+    window.setTimeout(function() {myMap();},5500);
+  });
+  var infowindow = new google.maps.InfoWindow({
+  content:"Oia: Santorini, Greece"
+  });
+infowindow.open(map,mark);
+google.maps.event.addListener(marke,'click',function() {
+    var pos = map.getZoom();
+    map.setZoom(14);
+    map.setCenter(marke.getPosition());
+    window.setTimeout(function() {myMap();},5500);
+});
+var infowindow = new google.maps.InfoWindow({
+  content:"Great Exuma Island, The Bahamas"
+  });
+infowindow.open(map,marke);
+  google.maps.event.addListener(marker,'click',function() {
+      var pos = map.getZoom();
+      map.setZoom(13);
+      map.setCenter(marker.getPosition());
+      window.setTimeout(function() {myMap();},5500);
+  });
+  var infowindow = new google.maps.InfoWindow({
+  content:"Mount Fuji, Japan"
+  });
+infowindow.open(map,marker);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4GsB_2SimZJN0sJZDjHPwnv6dLAeYxP0&callback=myMap"
+    async defer></script>
+
+</body>
+</html>
